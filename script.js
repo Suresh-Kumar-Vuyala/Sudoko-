@@ -1,5 +1,7 @@
 const cells=document.querySelectorAll(".box")
 const clearButtton=document.querySelector("#clear")
+const solveButton=document.querySelector("#solve")
+
 
 
 
@@ -17,7 +19,7 @@ var mat=[
 
 
 
-
+//----------------------------------------------------------------------------------------------------
 function Clear(mat){
        for(let i=0;i<9;i++){
         for(let j=0;j<9;j++){
@@ -31,11 +33,33 @@ function Clear(mat){
         }
        }
 }
+//--------------------------------------------------------------------------------------------------------------
+function solve(mat){
+       
+    for(let i=0;i<9;i++){
+        for(let j=0;j<9;j++){
+            if(mat[i][j]!=0){
+                continue
+            }
+            for(let k=1;k<=9;k++){
+                  if(check(mat,i,j,k)){
+                    mat[i][j]=k;
+                    if(solve(mat)){
+                        return true
+                    }
+                    mat[i][j]=0
+                  }
+            }
+            return false
+        }
+    }
+    return true;
+
+}
 
 
 
-
-
+//----------------------------------------------------------------------------------------------------------------
 function check(mat,i,j,val){
     for(let k=0;k<9;k++){
                if(mat[i][k]==val){
@@ -66,14 +90,23 @@ function check(mat,i,j,val){
 
 }
 
-
+//------------------------------------------------------------------->>
 clearButtton.addEventListener("click",()=>{
     Clear(mat)
 })
 
+//---------------------------------------------------------------------->>
 
-
-
+solveButton.addEventListener('click',()=>{
+    solve(mat)
+    for(let i=0;i<9;i++){
+         for(let j=0;j<9;j++){
+            let S=`${i}++${j}`
+            let element=document.getElementsByName(S);             
+               element[0].value=mat[i][j]
+         }
+    }
+})
 
 
 
