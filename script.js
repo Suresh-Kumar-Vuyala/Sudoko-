@@ -1,4 +1,6 @@
 const cells=document.querySelectorAll(".box")
+const clearButtton=document.querySelector("#clear")
+
 
 
 var mat=[
@@ -12,6 +14,23 @@ var mat=[
    [0,0,0,0,0,0,0,0,0],
    [0,0,0,0,0,0,0,0,0],
 ]
+
+
+
+
+function Clear(mat){
+       for(let i=0;i<9;i++){
+        for(let j=0;j<9;j++){
+            //console.log(i+""+j)
+               let S=`${i}++${j}`
+               mat[i][j]=0;
+               let element=document.getElementsByName(S);             
+               element[0].value=''
+
+
+        }
+       }
+}
 
 
 
@@ -46,6 +65,22 @@ function check(mat,i,j,val){
     return true
 
 }
+
+
+clearButtton.addEventListener("click",()=>{
+    Clear(mat)
+})
+
+
+
+
+
+
+
+
+
+
+
 
 
 
