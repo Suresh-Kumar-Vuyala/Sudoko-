@@ -121,17 +121,24 @@ cells.forEach((cell)=>{
     cell.addEventListener("input",(e)=>{
         let MM=e.target.value;
         let val;
+        let name=cell.name;
+        let i=name[0]
+        let j=name[3]
+        let S=`${i}++${j}`
+            let element=document.getElementsByName(S);
+      
         if(MM==''){
             val=0
+        }
+        else if(MM!='1' && MM!='2' && MM!='3' && MM!='4'  && MM!='5' && MM!='6' && MM!='7' && MM!='8' && MM!='9'){
+            element[0].value=''
+            alert("Input value must a number and between 1 and 9. Your playing Sudoko u must known it!!")
         }
         else{
             val=Number(MM);
         }
 
-        let name=cell.name;
-        let i=name[0]
-        let j=name[3]
-       // mat[i][j]=val
+        
        if(val==0){
         mat[i][j]=0;
        }
@@ -141,7 +148,10 @@ cells.forEach((cell)=>{
         mat[i][j]=val;
        }
        else{
-        console.log(false)
+                     
+               element[0].value=''
+        
+        alert(`You cannot put ${val} on the cell`)
        }
     }
     })
